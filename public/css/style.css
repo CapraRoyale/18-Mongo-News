@@ -1,0 +1,14 @@
+body {
+    font-family: 'Roboto',
+        sans-serif;
+}
+
+hr.jumbo {
+    width: 50%;
+}
+
+.jumbotron {
+    background-image: url(../img/newspaper.jpg);
+    background-size: 100%;
+    background-position: center;
+}
