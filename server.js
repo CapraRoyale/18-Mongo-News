@@ -6,23 +6,23 @@ var cheerio = require("cheerio");
 var exphbs = require("express-handlebars")
 
 
-// exphbs.create({
-//     helpers: {
-//         'substring': function (string, start, end) {
-//             var theString = string.substring(start, end);
-//             // attach dot dot dot if string greater than suggested end point
-//             if (string.length > end) {
-//                 theString += '...';
-//             }
-//             return new exphbs.SafeString(theString);
-//         }
-//     }
-// });
+exphbs.create({
+    helpers: {
+        'substring': function (string, start, end) {
+            var theString = string.substring(start, end);
+            // attach dot dot dot if string greater than suggested end point
+            if (string.length > end) {
+                theString += '...';
+            }
+            return new exphbs.SafeString(theString);
+        }
+    }
+});
 
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
@@ -44,7 +44,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/unit18Populater", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/TESTnewsScraper", {
     useNewUrlParser: true
 });
 
@@ -110,7 +110,7 @@ app.get("/scrape", function (req, res) {
         });
 
         // Send a message to the client
-        res.redirect("/articles");
+        res.redirect("/");
     });
 });
 
