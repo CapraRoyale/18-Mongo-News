@@ -1,10 +1,14 @@
 <div class="row">
-    <div class="col">
+    <div class="mb-3 mt-3 col">
         <div class="card" style="width:auto">
             <div class="card-body">
                 <h5 class="card-title"><a href="../articles/{{this._id}}">{{this.title}}</a></h5>
                 <p class="card-text">{{this.text}}</p>
-                <a href="{{this.link}}">Link to Article</a>
+                <p class="text-center">
+                    <a class="btn btn-outline-dark" href="{{this.link}}">Link to Article </a>
+                    <span class="vr"></span>
+                    <a class="btn btn-outline-dark" id="{{this._id}}">Comment</a>
+                </p>
             </div>
         </div>
     </div>

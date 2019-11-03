@@ -3,7 +3,21 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
-var exphbs = require("express-handlebars");
+var exphbs = require("express-handlebars")
+
+
+// exphbs.create({
+//     helpers: {
+//         'substring': function (string, start, end) {
+//             var theString = string.substring(start, end);
+//             // attach dot dot dot if string greater than suggested end point
+//             if (string.length > end) {
+//                 theString += '...';
+//             }
+//             return new exphbs.SafeString(theString);
+//         }
+//     }
+// });
 
 // Require all models
 var db = require("./models");
@@ -30,7 +44,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/unit18Populater", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/unit18Populater", {
     useNewUrlParser: true
 });
 
@@ -77,7 +91,7 @@ app.get("/scrape", function (req, res) {
                 .children("p")
                 .text();
 
-            result.link = (website+$(this)
+            result.link = (website + $(this)
                 .children("header")
                 .children("h2")
                 .children("a")
@@ -124,7 +138,11 @@ app.get("/articles/:id", function (req, res) {
         .populate("note")
         .then(function (dbArticle) {
             // If we were able to successfully find an Article with the given id, send it back to the client
-            res.json(dbArticle);
+            // res.json(dbArticle);
+            res.render("articles", {
+                article: [dbArticle]
+            })
+            console.log(dbArticle)
         })
         .catch(function (err) {
             // If an error occurred, send it to the client

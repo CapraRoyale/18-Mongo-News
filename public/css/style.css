@@ -12,3 +12,11 @@ hr.jumbo {
     background-size: 100%;
     background-position: center;
 }
+
+span.vr{
+    display: inline-block;
+    border-left: 2px solid grey;
+    margin-left: 3px;
+    margin-right: 3px;
+    line-height: 1.5em;
+}
