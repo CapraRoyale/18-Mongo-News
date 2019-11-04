@@ -2,31 +2,26 @@
     <div class="mb-3 mt-3 col">
         <div class="card" style="width:auto">
             <div class="card-body">
-                <h5 class="card-title"><a href="../articles/{{this._id}}">{{this.title}}</a></h5>
-                <p class="card-text">{{this.text}}</p>
-                {{#if this.note}}
-                <h2 class="card-text">{{this.note.title}}</h2>
-                <h2 class="card-text">{{this.note.title}}</h2>
-                {{else}}
-                <h3 class="card-text" id="{{this._id}}">No Comments</h3>
-                <script>
-                    $(#{{this._id}}).onClick(function(){
-                        $("#notes").append("<h2>" + data.title + "</h2>");
-                        // An input to enter a new title
-                        $("#notes").append("<input id='titleinput' name='title'>");
-                        // A textarea to add a new note body
-                        $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-                        // A button to submit a new note, with the id of the article saved to it
-                        $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-                    }
-                </script>
-                {{/if}}
-                <p class="text-center">
+                <h5 class="card-title article-title"><a href="../articles/{{this._id}}">{{this.title}}</a></h5>
+                <p class="card-text article-text">{{this.text}}</p>
+                <p class="text-center actionables">
                     <a class="btn btn-outline-dark" href="{{this.link}}">Link to Article </a>
                     <span class="vr"></span>
-                    <a class="btn btn-outline-dark" id="{{this._id}}">Comment</a>
+                    {{!-- if the viewComment boolean is true, render the comment hbs file --}}
+                    {{#if viewComment}}
+                    {{!-- if this'note has a value (e.g. it exists) the render the comment hbs file --}}
+                    {{#if this.note}}
+                    {{>comment}}
+                    {{else}}
+                    {{!-- otherwise, display the text No Comments --}}
+                    <h3 class="card-text" id="{{this._id}}">No Comments</h3>
+                    <hr>
+                    {{/if}}
+                    {{>leaveComment}}
+                    {{/if}}
                 </p>
             </div>
         </div>
     </div>
 </div>
+{{!-- <script src="./app.js"></script> --}}

@@ -44,17 +44,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/TESTnewsScraper", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/TESTERnewsScraper", {
     useNewUrlParser: true
 });
 
 // Routes
 app.get("/", function (req, res) {
     db.Article.find({})
-        .then(function (dbArticle) {
+        .then(function (dbArticles) {
             // If we were able to successfully find Articles, send them back to the client
             res.render("home", {
-                article: dbArticle
+                articles: dbArticles
             })
         })
         .catch(function (err) {
@@ -101,7 +101,6 @@ app.get("/scrape", function (req, res) {
             db.Article.create(result)
                 .then(function (dbArticle) {
                     // View the added result in the console
-                    console.log(dbArticle);
                 })
                 .catch(function (err) {
                     // If an error occurred, log it
@@ -127,7 +126,6 @@ app.get("/articles", function (req, res) {
             res.json(err);
         });
 });
-// TODO: Use client-side JS for rendering Handlebars notes
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
@@ -139,10 +137,10 @@ app.get("/articles/:id", function (req, res) {
         .then(function (dbArticle) {
             // If we were able to successfully find an Article with the given id, send it back to the client
             // res.json(dbArticle);
-            res.render("articles", {
-                article: [dbArticle]
+            console.log(dbArticle);
+            res.render("viewArticle", {
+                article: dbArticle
             })
-            console.log(dbArticle)
         })
         .catch(function (err) {
             // If an error occurred, send it to the client
