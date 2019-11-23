@@ -1,7 +1,9 @@
 <div class="form-group">
-    <label for="comment">Leave a Comment</label>
-    <textarea class="form-control" name="title" id="title" rows="1"></textarea>
-    <textarea class="form-control" name="body" id="body" rows="3"></textarea>
-    <button class="btn btn-outline-dark" id="{{this._id}}" type="submit" formmethod="POST"
-        formtarget="_self">Comment</button>
+    <form action="../articles/{{this._id}}" method="POST" formtarget="_self">
+        <label for="comment">Leave a Comment</label>
+        <textarea class="mt-1 mb-1 form-control" name="title" id="title" rows="1"></textarea>
+        <textarea class="mt-1 mb-1 form-control" name="body" id="body" rows="3"></textarea>
+        <button class="mt-1 mb-1 btn btn-outline-dark" id="{{this._id}}" type="submit" formmethod="POST"
+            formtarget="_self">Comment</button>
+    </form>
 </div>

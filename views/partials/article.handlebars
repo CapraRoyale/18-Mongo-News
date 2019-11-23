@@ -1,23 +1,25 @@
 <div class="row">
     <div class="mb-3 mt-3 col">
-        <div class="card" style="width:auto">
+        <div class="card bg-light border-secondary" style="width:auto">
             <div class="card-body">
-                <h5 class="card-title article-title"><a href="../articles/{{this._id}}">{{this.title}}</a></h5>
-                <p class="card-text article-text">{{this.text}}</p>
+                <h5 class="card-title article-title"><a href="../articles/{{_id}}">{{title}}</a></h5>
+                <p class="card-text article-text">{{text}}</p>
                 <p class="text-center actionables">
-                    <a class="btn btn-outline-dark" href="{{this.link}}">Link to Article </a>
-                    <span class="vr"></span>
+                    {{#if link}}
+                        <a class="btn btn-outline-dark" href="{{link}}">Link to Article </a>
+                        <span class="vr"></span>
+                    {{/if}}
                     {{!-- if the viewComment boolean is true, render the comment hbs file --}}
                     {{#if viewComment}}
-                    {{!-- if this'note has a value (e.g. it exists) the render the comment hbs file --}}
-                    {{#if this.note}}
-                    {{>comment}}
-                    {{else}}
-                    {{!-- otherwise, display the text No Comments --}}
-                    <h3 class="card-text" id="{{this._id}}">No Comments</h3>
-                    <hr>
-                    {{/if}}
-                    {{>leaveComment}}
+                        {{!-- if this'note has a value (e.g. it exists) the render the comment hbs file --}}
+                        {{#if note}}
+                            {{>comment}}
+                        {{else}}
+                            {{!-- otherwise, display the text No Comments --}}
+                            <h3 class="card-text" id="{{_id}}">No Comments</h3>
+                            <hr>
+                        {{/if}}
+                        {{>leaveComment}}
                     {{/if}}
                 </p>
             </div>
